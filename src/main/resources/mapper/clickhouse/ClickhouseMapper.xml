@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.mapper.clickhouse.ClickhouseMapper">
+
+    <select id="test" resultType="java.lang.Integer">
+        select count(*) from d_ioc
+    </select>
+
+    <select id="getOriginAlarmLogReportData" resultType="java.util.Map">
+        select id, collect_ip, log_type, equ_ip, collect_time, raw_msg, equ_asset_type_name, event_id, src_ip, serverity,
+        src_port, dst_ip, dst_port, attack_type, http_method, url_address, `action`, protocol, status, total_flow,
+        peak_flow, start_time, end_time, file_name, process_name
+        from d_enhance where id in (
+        <foreach collection="LogIdList" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </select>
+
+    <select id="getRawMsgById" resultType="java.util.Map">
+        select id, raw_msg from d_enhance where id in (
+        <foreach collection="LogIdList" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </select>
+</mapper>

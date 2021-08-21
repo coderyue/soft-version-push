@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.mapper.mysql.MysqlMapper">
+
+    <select id="test" resultType="java.lang.Integer">
+        select count(*) from sys_sens_personnel
+    </select>
+
+    <select id="getSecurityAddReportData" resultType="java.util.LinkedHashMap">
+        select id, event_id, create_time, dst_country, dst_city, dst_ip, dst_port, src_country, src_city, raw_log_id,
+               src_ip, src_port, serverity, protocol, event_name, event_count, create_time, update_time, analysis_type, dst_asset_type_name
+        from tc_alarm where 1 = 1
+        <if test="startTime != null and startTime != ''">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and create_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <select id="getSecurityAddLogId" resultType="java.lang.String">
+        select raw_log_id
+        from tc_alarm where 1 = 1
+        <if test="startTime != null and startTime != ''">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and create_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <insert id="saveAlarmData" parameterType="java.util.Map">
+        insert into data_report (id, alarm_id, report_type, create_time, event_type, event_name, severity,
+        src_ip, dst_ip, process_type, event_device_type, dst_asset_type_name,
+        raw_log_cnt, raw_log_id, raw_log, report_data) values
+        <foreach collection="reportDataMapList" item="item" separator=",">
+            (#{item.id}, #{item.alarm_id}, #{item.report_type}, #{item.create_time}, #{item.event_type}, #{item.event_name}, #{item.severity},
+            #{item.src_ip}, #{item.dst_ip}, #{item.process_type}, #{item.event_device_type}, #{item.dst_asset_type_name},
+            #{item.raw_log_cnt}, #{item.raw_log_id}, #{item.raw_log}, #{item.report_data})
+        </foreach>
+    </insert>
+</mapper>
