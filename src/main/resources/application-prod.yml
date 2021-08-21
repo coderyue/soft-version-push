@@ -1,16 +1,16 @@
 mysql:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://10.209.67.100:3306/tsgzdbnew?autoReconnect=true&&useTimezone=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&useSSL=true&allowMultiQueries=true
+    jdbc-url: jdbc:mysql://localhost:3308/tsgzdbnew?autoReconnect=true&&useTimezone=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&useSSL=true&allowMultiQueries=true
     #    username: tsgzuser
     #    password: tsgzpassword
-    username: tsadmin
-    password: Xybc@12#$
+    username: root
+    password: root
 
 clickhouse:
   datasource:
     driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
-    jdbc-url: jdbc:clickhouse://10.209.67.95:8123/rtc
+    jdbc-url: jdbc:clickhouse://47.111.79.98:8088/test_cjy?socket_timeout=300000
     password:
     initialSize: 10
     maxActive: 100
@@ -19,7 +19,7 @@ clickhouse:
 
 spring:
   kafka:
-    bootstrap-servers: 10.243.103.56:29092,10.243.103.59:29092,10.243.103.60:29092,10.243.103.72:29092,10.243.103.73:29092,10.243.103.74:29092 #服务器的ip及端口，可以写多个，服务器之间用“：”间隔
+    bootstrap-servers: 45.77.209.211:9092 #服务器的ip及端口，可以写多个，服务器之间用“：”间隔
     producer: #生产者配置
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
