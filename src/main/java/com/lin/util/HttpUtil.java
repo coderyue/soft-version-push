@@ -96,7 +96,7 @@ public class HttpUtil {
      */
     public static String post(String url, String body, Map<String, String> params) {
         HttpRequest request = HttpRequest.newBuilder(URI.create(buildUrlWithParams(url, params)))
-                .header("Content-Type", "application/json")
+                .header("Content-Type", "application/json;charset=UTF-8")
                 .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8)).build();
         return send(request);
     }

@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.lin.mapper.clickhouse.ClickhouseMapper;
 import com.lin.mapper.mysql.MysqlMapper;
 import com.lin.util.HttpUtil;
+import com.lin.util.PushUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +43,9 @@ public class TestController {
     @Value("${push.topic}")
     private String topic;
 
+    @Autowired
+    private PushUtil pushUtil;
+
 
     @RequestMapping("/datasource")
     public String testDatasource() {
@@ -49,6 +55,10 @@ public class TestController {
         return "success";
     }
 
+    /**
+     * 测试发送
+     * @return
+     */
     @RequestMapping("/send")
     public String testSendMessage() {
         Map<String, String> params = new HashMap<>();
@@ -63,6 +73,29 @@ public class TestController {
         logger.info("data:" + jsonObject.get("data"));
         logger.info("count", jsonObject.get("count"));
         return body;
+    }
+
+    /***
+     * 发送消息
+     * @param title
+     * @param content
+     * @return
+     */
+    @RequestMapping("/sendMessage")
+    public boolean sendMessage(String title, String content) {
+        if (StringUtils.hasText(title) && StringUtils.hasText(content)) {
+//            var params = new HashMap<>();
+//            params.put("token", token);
+//            params.put("topic", topic);
+//            params.put("title", title);
+//            params.put("content", content);
+//            HttpUtil.post(url, JSONObject.toJSONString(params));
+            pushUtil.pushMsg(title, content);
+            logger.info("push success, title:" + title + ", content" + content);
+            return true;
+        }
+        logger.info("=====content is empty====");
+        return false;
     }
 
 }
