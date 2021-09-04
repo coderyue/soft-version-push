@@ -54,6 +54,9 @@ public class PushService {
     }
 
     private void saveVersionToFile(List<Map<String, String>> dataMapList, File file) throws IOException {
+        if (dataMapList.isEmpty()) {
+            return;
+        }
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write("# 软件名称  正则  url     当前版本    中间用|分隔");
         writer.newLine();
