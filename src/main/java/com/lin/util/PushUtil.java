@@ -38,7 +38,7 @@ public class PushUtil {
 
             HttpResponse response = Unirest.post(url)
                     .header("Content-Type", "application/json")
-                    .body(params)
+                    .body(params).connectTimeout(30 * 1000)
                     .asEmpty();
             if (response.isSuccess()) {
                 return true;

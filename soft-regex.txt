@@ -1,3 +1,13 @@
 # 软件名称  正则  url     当前版本    中间用|分隔
+v2rayN|\d+\.\d+|https://github.com/2dust/v2rayN|
+v2rayNG|\d+\.\d+\.\d+|https://github.com/2dust/v2rayNG/|
+Go|go\d+\.\d+|https://golang.org/dl/|
 MySQL|MySQL Community Server \d+\.\d+\.\d+|https://dev.mysql.com/downloads/mysql/|MySQL Community Server 8.0.26
 Kafka|The current stable version is \d+\.\d+\.\d+|http://kafka.apache.org/downloads|The current stable version is 2.8.0
+idea|ideaIU-\d+\.\d+\.\d+|https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release|ideaIU-2021.2.1
+GoLand|goland-\d+\.\d+\.\d+|https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release|goland-2021.2.2
+Gradle|"version" : "\d+\.\d+\.\d+|https://services.gradle.org/versions/release-nightly|"version" : "6.9.1
+Maven|Apache Maven \d+\.\d+\.\d+|https://maven.apache.org/download.cgi|Apache Maven 3.8.2
+todesk win版|\d+\.\d+\.\d+|https://update.todesk.com/windows/uplog.html|3.3.0
+Redis|Redis \d+\.\d+\.\d+|https://redis.io/|Redis 6.2.5
+Navicat|Navicat Premium version \d+|https://www.navicat.com/en/download/navicat-premium|Navicat Premium version 15
