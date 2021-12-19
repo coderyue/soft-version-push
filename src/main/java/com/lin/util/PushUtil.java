@@ -38,6 +38,8 @@ public class PushUtil {
 
             HttpResponse response = Unirest.post(url)
                     .header("Content-Type", "application/json")
+                    .socketTimeout(1000 * 60)
+                    .connectTimeout(1000 * 60)
                     .body(params).connectTimeout(30 * 1000)
                     .asEmpty();
             if (response.isSuccess()) {
